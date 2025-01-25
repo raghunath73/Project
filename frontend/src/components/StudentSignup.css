@@ -1,0 +1,102 @@
+/* General Styling for Signup Page */
+.signup-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    /* background-color: #f7f7f7; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .signup-content {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .signup-heading {
+    color: #007bff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Container for the input fields */
+  .input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px; /* Space between input fields */
+  }
+  
+  /* Styling for input fields */
+  .signup-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    padding-left: 35px;
+    position: relative;
+  }
+  
+  /* Focus Styling (only on the bottom border) */
+  .signup-input:focus {
+    border-bottom: 2px solid #007bff;
+  }
+  
+  /* Hover effect for bottom border */
+  .signup-input:hover {
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .submit-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .submit-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-option {
+    margin-top: 20px;
+    font-size: 1em;
+  }
+  
+  .login-option a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-option a:hover {
+    text-decoration: underline;
+  }
+  .login-input:hover {
+    border-bottom: 2px solid #007BFF; /* Blue border on hover */
+  }
+  
+  /* Focus Effect - When user starts typing */
+  .login-input:focus {
+    border-bottom: 2px solid #007BFF; /* Blue border on focus */
+  }
+  

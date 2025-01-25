@@ -1,0 +1,107 @@
+/* AdminDash.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+}
+
+.admin-dash {
+  width: 100%;
+}
+
+.admin-header {
+  background-color: #4c6af0;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.admin-header h1 {
+  margin: 0;
+}
+
+.profile-icon {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #333;
+}
+
+.dropdown li:hover {
+  background-color: #f4f4f9;
+}
+
+.admin-content {
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.students-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.students-table th,
+.students-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.students-table th {
+  background-color: #f4f4f9;
+  font-weight: bold;
+  position: relative;
+  color: #333;
+}
+
+.students-table button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+}
+
+.students-table button svg {
+  transition: transform 0.2s ease;
+}
+
+.students-table button:hover svg {
+  transform: scale(1.2);
+}
+
+.students-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}

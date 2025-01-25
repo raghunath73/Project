@@ -1,0 +1,79 @@
+.student-dashboard {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 15px;
+  }
+  
+  .dashboard-header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-btn, .logout-btn {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .profile-btn:hover, .logout-btn:hover {
+    background-color: #ddd;
+  }
+  
+  .dashboard-content {
+    padding: 20px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .profile-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .scorecards {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .scorecard {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+  }
+  
+  .charts {
+    margin-top: 20px;
+    width: 100%;
+  }
+  

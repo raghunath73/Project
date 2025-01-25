@@ -1,0 +1,144 @@
+/* General Styling for Login Page */
+.login-page {
+	font-family: Arial, sans-serif;
+	padding: 20px;
+	/* background-color: #f7f7f7; */
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  .header {
+	background-color: #007bff;
+	color: white;
+	padding: 20px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+  }
+  
+  .header-logo h1 {
+	margin: 0;
+  }
+  
+  .header-nav ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	gap: 20px;
+  }
+  
+  .header-nav ul li {
+	margin: 0;
+  }
+  
+  .header-nav ul li a {
+	color: white;
+	text-decoration: none;
+  }
+  
+  .login-content {
+	margin-top: 50px;
+	width: 100%;
+	max-width: 500px;
+	text-align: center;
+  }
+  
+  .login-heading {
+	color: #007bff;
+	font-size: 2rem;
+	margin-bottom: 50px;
+  }
+  
+  .login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+  }
+  
+  /* Container for the input fields */
+  .input-container {
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin-bottom: 20px; /* Space between input fields */
+  }
+  
+  /* Styling for input fields */
+  .login-input {
+	width: 80%;
+	padding: 10px;
+	font-size: 1em;
+	border: none;
+	border-bottom: 2px solid #ddd;
+	outline: none;
+	padding-left: 35px;
+	position: relative;
+  }
+  
+  /* Focus Styling (only on the bottom border) */
+  .login-input:focus {
+	border-bottom: 2px solid #007bff;
+  }
+  
+  /* Hover effect for bottom border */
+  .login-input:hover {
+	border-bottom: 2px solid #007bff;
+  }
+  
+  /* Styling for icons inside the input fields */
+  .input-icon {
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #007bff;
+	font-size: 1.2em;
+	pointer-events: none; /* Make sure icon doesn't interfere with input field */
+  }
+  
+  .submit-container {
+	display: flex;
+	justify-content: center;
+  }
+  
+  .submit-button {
+	background-color: #007bff;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	font-size: 1em;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+	background-color: #0056b3;
+  }
+  
+  .signup-option {
+	margin-top: 20px;
+	font-size: 1em;
+  }
+  
+  .signup-option a {
+	color: #007bff;
+	text-decoration: none;
+  }
+  
+  .signup-option a:hover {
+	text-decoration: underline;
+  }
+  .login-input:hover {
+	border-bottom: 2px solid #007BFF; /* Blue border on hover */
+  }
+  
+  /* Focus Effect - When user starts typing */
+  .login-input:focus {
+	border-bottom: 2px solid #007BFF; /* Blue border on focus */
+  }
