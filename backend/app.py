@@ -101,6 +101,7 @@ def get_leetcode_score(username):
         data = response.json()
         stats = data['data']['matchedUser']['submitStats']['acSubmissionNum']
         total_solved = sum(stat['count'] for stat in stats)
+        print(total_solved)
         return str(int(total_solved/2)) if total_solved else '0'
     except Exception as e:
         print(f"Error fetching LeetCode stats for {username}: {e}")
@@ -126,6 +127,7 @@ def get_leetcode_rating(username):
         response = requests.post(url, json={"query": query, "variables": {"username": username}}, headers=headers)
         data = response.json()
         ranking = data['data']['matchedUser']['profile']['ranking']
+        print(ranking)
         return str(ranking) if ranking else '0'
     except Exception as e:
         print(f"Error fetching LeetCode rating for {username}: {e}")
@@ -159,20 +161,15 @@ def student_signup():
     section = data.get('section')
     password = data.get('password')
     email = data.get('email')
-    codechef = data.get('codechef')
-    codeforces = data.get('codeforces')
-    leetcode = data.get('leetcode')
-    platform_data = {
-        "codechef": data.get('codechef', ''),
-        "codechefscore" : get_codechef_score(codechef),
-        "codechefrating" : get_codechef_rating(codechef),
-        "codeforces": data.get('codeforces', ''),
-        "codeforcesscore" : get_codeforces_score(codeforces),
-        "codeforcesrating" : get_codeforces_rating(codeforces),
-        "leetcode": data.get('leetcode', ''),
-        "leetcodescore" : get_leetcode_score(leetcode),
-        "leetcoderating" : get_leetcode_rating(leetcode)
-}
+    codechef = data.get('codechef', '')
+    codechefscore = int(get_codechef_score(codechef) or 0)
+    codechefrating = int(get_codechef_rating(codechef) or 0)
+    codeforces = data.get('codeforces', '')
+    codeforcesscore = int(get_codeforces_score(codeforces) or 0)
+    codeforcesrating = int(get_codeforces_rating(codeforces) or 0)
+    leetcode = data.get('leetcode', '')
+    leetcoderating = int(get_leetcode_rating(leetcode) or 0)
+    leetcodescore = int(get_leetcode_score(leetcode) or 0)
 
     if not username or not roll_no or not section or not password or not email:
         return jsonify({"error": "All fields are required"}), 400
@@ -189,9 +186,9 @@ def student_signup():
 
     try:
         conn.execute("""
-            INSERT INTO students (roll_no, name, section, email, password, platform_data)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (roll_no, username, section, email, password, json.dumps(platform_data)))
+            INSERT INTO students (roll_no, name, section, email, password, codechef, codeforces, leetcode, codechefscore, codechefrating, codeforcesscore, codeforcesrating, leetcodescore, leetcoderating)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (roll_no, username, section, email, password, codechef, codeforces, leetcode, codechefscore, codechefrating, codeforcesscore, codeforcesrating, leetcodescore, leetcoderating))
         conn.commit()
         conn.close()
         return jsonify({"message": "Signup successful"}), 201
@@ -219,6 +216,52 @@ def student_login():
     if student:
         return jsonify({"message": "Login successful"}), 200
     return jsonify({"error": "Invalid credentials"}), 401
+
+
+@app.route('/api/students', methods=['GET'])
+def get_students():
+    """
+    Fetch all students from the database and send them to the frontend.
+    """
+    conn = get_db_connection()
+    try:
+        # Fetch all student records
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM students")
+        students_data = cursor.fetchall()
+
+        # Parse and format data for the frontend
+        students = []
+        for student in students_data:
+            student_details = {
+                "rollNo": student["roll_no"],
+                "name": student["name"],
+                "section": student["section"],
+                "email": student["email"],
+                "totalProblemsSolved": (
+                    int(student["codechefscore"] or 0)
+                    + int(student["codeforcesscore"] or 0)
+                    + int(student["leetcodescore"] or 0)
+                ),
+                "codechefRating": int(student["codechefrating"] or 0),
+                "codechefSolved": int(student["codechefscore"] or 0),
+                "codeforcesRating": int(student["codeforcesrating"] or 0),
+                "codeforcesSolved": int(student["codeforcesscore"] or 0),
+                "leetcodeRating": int(student["leetcoderating"] or 0),
+                "leetcodeSolved": int(student["leetcodescore"] or 0),
+            }
+            students.append(student_details)
+
+        # Return students data as JSON
+        return jsonify(students), 200
+
+    except sqlite3.Error as e:
+        return jsonify({"error": f"Database error: {e}"}), 500
+
+    finally:
+        conn.close()
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

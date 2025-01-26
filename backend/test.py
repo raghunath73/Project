@@ -71,7 +71,7 @@ if __name__ == "__main__":
     #fetch_all_students()
 
     # Delete a specific student
-    #delete_student("123")
+    #delete_student("21wh1a05h3")
 
     # Fetch all students again
     #fetch_all_students()

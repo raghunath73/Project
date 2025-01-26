@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS admin (
 """)
 
 # Create `students` table
+cursor.execute("DROP TABLE IF EXISTS students")  # Remove the existing `students` table if it exists
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS students (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,7 +23,15 @@ CREATE TABLE IF NOT EXISTS students (
     section TEXT,
     email TEXT,
     password TEXT,
-    platform_data TEXT
+    codechef TEXT,
+    codeforces TEXT,
+    leetcode TEXT,
+    codechefscore INTEGER,
+    codechefrating INTEGER,
+    codeforcesscore INTEGER,
+    codeforcesrating INTEGER,
+    leetcodescore INTEGER,
+    leetcoderating INTEGER
 )
 """)
 
@@ -32,6 +41,7 @@ if not cursor.fetchone():
     cursor.execute("INSERT INTO admin (username, password) VALUES (?, ?)", ("admin", "admin"))
     print("Admin user created with username: 'admin' and password: 'admin'.")
 
+# Commit the changes and close the connection
 connection.commit()
 connection.close()
 print("Database initialized successfully.")

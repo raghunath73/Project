@@ -10,7 +10,7 @@ body {
 }
 
 .admin-header {
-  background-color: #4c6af0;
+  background-color: #2e7bef;
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -82,6 +82,7 @@ h2 {
 .students-table th {
   background-color: #f4f4f9;
   font-weight: bold;
+  white-space: pre-line;
   position: relative;
   color: #333;
 }
@@ -90,18 +91,40 @@ h2 {
   background: none;
   border: none;
   cursor: pointer;
+  margin-left: 5px;
   position: absolute;
   right: 10px;
 }
 
-.students-table button svg {
-  transition: transform 0.2s ease;
-}
-
-.students-table button:hover svg {
-  transform: scale(1.2);
-}
-
 .students-table tbody tr:nth-child(odd) {
   background-color: #f9f9f9;
+}
+
+.filters {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: #333;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.filter-item input,
+.filter-item select {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+td{
+  color: #333;
 }
