@@ -142,3 +142,7 @@
   .login-input:focus {
 	border-bottom: 2px solid #007BFF; /* Blue border on focus */
   }
+
+  p{
+	color: black;
+  }

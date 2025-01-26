@@ -5,8 +5,12 @@ import sqlite3
 import requests
 from bs4 import BeautifulSoup
 import re
+import jwt
+import datetime
+from functools import wraps
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'raghunath'
 CORS(app)
 
 # Database connection
@@ -196,7 +200,20 @@ def student_signup():
         conn.close()
         return jsonify({"error": f"Database error: {e}"}), 500
 
-# Student login
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.headers.get('x-access-token')
+        if not token:
+            return jsonify({"error": "Token is missing"}), 403
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+        except:
+            return jsonify({"error": "Token is invalid"}), 403
+        return f(*args, **kwargs)
+    return decorated
+
+# Student login route
 @app.route('/student/login', methods=['POST'])
 def student_login():
     data = request.get_json()
@@ -214,8 +231,47 @@ def student_login():
     conn.close()
 
     if student:
-        return jsonify({"message": "Login successful"}), 200
+        return jsonify({
+            "success": True,
+            "message": "Login successful",
+            "username": username  # Only return username
+        }), 200
+
     return jsonify({"error": "Invalid credentials"}), 401
+
+
+# Example protected route
+@app.route('/student/dashboard', methods=['GET'])
+def student_dashboard():
+    username = request.args.get('username')
+    
+    if not username:
+        return jsonify({"error": "Username is required"}), 400
+
+    conn = get_db_connection()
+    student = conn.execute(
+        "SELECT * FROM students WHERE name = ?",
+        (username,)
+    ).fetchone()
+    
+    conn.close()
+
+    if student:
+        return jsonify({
+            'name': student['name'],
+            'email': student['email'],
+            'section': student['section'],
+            'codechef': student['codechef'],
+            'codeforces': student['codeforces'],
+            'leetcode': student['leetcode'],
+            'codechefscore': student['codechefscore'],
+            'codechefrating': student['codechefrating'],
+            'codeforcesscore': student['codeforcesscore'],
+            'codeforcesrating': student['codeforcesrating'],
+            'leetcodescore': student['leetcodescore'],
+            'leetcoderating': student['leetcoderating']
+        })
+    return jsonify({"error": "Student not found"}), 404
 
 
 @app.route('/api/students', methods=['GET'])

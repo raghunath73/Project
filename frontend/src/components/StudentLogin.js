@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"; // For redirection
 import axios from "axios";
 import "./StudentLogin.css";
@@ -10,6 +10,13 @@ const StudentLogin = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate(); // Hook for navigation
+
+  useEffect(() => {
+    // Redirect to /studentdash if username is present in localStorage
+    if (localStorage.getItem("username")) {
+      navigate("/studentdash");
+    }
+  }, []); // Empty array to only run once when the component is mounted
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,16 +32,16 @@ const StudentLogin = () => {
         { headers: { "Content-Type": "application/json" } }
       );
 
-      if (response.data.success) {
+      if (response.data.success && response.data.message === "Login successful") {
         setMessage("Login successful! Redirecting...");
 
-        // Save the token into localStorage (if sent by the backend)
-        localStorage.setItem("token", response.data.token);
+        // Store the username in localStorage
+        localStorage.setItem("username", username);
 
+        // After a short delay, redirect to the student dashboard
         setTimeout(() => {
-          // After successful login, redirect to dashboard
-          navigate("/studentdash");
-        }, 2000);
+          navigate("/studentdash"); // Redirect to student dashboard
+        }, 1000); // 1-second delay before redirecting
       } else {
         setMessage(response.data.message || "Invalid credentials. Please try again.");
       }
