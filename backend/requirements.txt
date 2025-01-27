@@ -3,4 +3,3 @@ flask-cors
 jsonify
 requests
 beautifulsoup4
-PyJWT

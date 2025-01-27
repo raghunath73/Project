@@ -5,12 +5,8 @@ import sqlite3
 import requests
 from bs4 import BeautifulSoup
 import re
-import jwt
-import datetime
-from functools import wraps
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'raghunath'
 CORS(app)
 
 # Database connection
@@ -199,19 +195,6 @@ def student_signup():
     except sqlite3.Error as e:
         conn.close()
         return jsonify({"error": f"Database error: {e}"}), 500
-
-def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = request.headers.get('x-access-token')
-        if not token:
-            return jsonify({"error": "Token is missing"}), 403
-        try:
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-        except:
-            return jsonify({"error": "Token is invalid"}), 403
-        return f(*args, **kwargs)
-    return decorated
 
 # Student login route
 @app.route('/student/login', methods=['POST'])
